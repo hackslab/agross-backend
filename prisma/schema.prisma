@@ -1,0 +1,161 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Category {
+  id            String        @id @default(uuid())
+  name_ru       String        @map("name_ru")
+  name_en       String        @map("name_en")
+  name_uz       String        @map("name_uz")
+  name_kz       String        @map("name_kz")
+  description_ru String       @map("description_ru")
+  description_en String       @map("description_en")
+  description_uz String       @map("description_uz")
+  description_kz String       @map("description_kz")
+  image         String
+  // Relation to Subcategories
+  subcategories Subcategory[]
+  // Relation to Products
+  products      Product[]
+
+  @@map("categories")
+}
+
+model Subcategory {
+  id         String    @id @default(uuid())
+  name_ru    String    @map("name_ru")
+  name_en    String    @map("name_en")
+  name_uz    String    @map("name_uz")
+  name_kz    String    @map("name_kz")
+  // Relation to Category
+  category   Category  @relation(fields: [categoryId], references: [id])
+  categoryId String    @map("category_id")
+  // Relation to Products
+  products   Product[]
+
+  @@map("subcategories")
+}
+
+model Product {
+  id            String        @id @default(uuid())
+  name_ru       String        @map("name_ru")
+  name_en       String        @map("name_en")
+  name_uz       String        @map("name_uz")
+  name_kz       String        @map("name_kz")
+  description_ru String       @map("description_ru")
+  description_en String       @map("description_en")
+  description_uz String       @map("description_uz")
+  description_kz String       @map("description_kz")
+  price         Decimal       @db.Decimal(10, 2)
+  structure_ru  String        @map("structure_ru")
+  structure_en  String        @map("structure_en")
+  structure_uz  String        @map("structure_uz")
+  structure_kz  String        @map("structure_kz")
+  quantity      Int
+  unit          Unit          @relation(fields: [unitId], references: [id])
+  unitId        String        @map("unit_id")
+  viewCount     Int           @default(0) @map("view_count")
+  isDeleted     Boolean       @default(false) @map("is_deleted")
+  // Relation to Category
+  category      Category      @relation(fields: [categoryId], references: [id])
+  categoryId    String        @map("category_id")
+  // Relation to Subcategory
+  subcategory   Subcategory   @relation(fields: [subcategoryId], references: [id])
+  subcategoryId String        @map("subcategory_id")
+  // Relation to Country
+  country       Country       @relation(fields: [countryId], references: [id])
+  countryId     String        @map("country_id")
+  // Relation to ProductFiles
+  files         ProductFile[]
+
+  @@map("products")
+}
+
+model Unit {
+  id        String  @id @default(uuid())
+  name      String
+  // Relation to Products
+  products Product[]
+
+  @@map("units")
+}
+
+model ProductFile {
+  id        String  @id @default(uuid())
+  isVideo   Boolean @default(false) @map("is_video")
+  url       String
+  order     Int     @default(0)
+  // Relation to Product
+  product   Product @relation(fields: [productId], references: [id])
+  productId String  @map("product_id")
+
+  @@map("product_files")
+}
+
+model Country {
+  id       String    @id @default(uuid())
+  name     String
+  // Relation to Products
+  products Product[]
+
+  @@map("countries")
+}
+
+model Admin {
+  id            String  @id @default(uuid())
+  name          String
+  username      String  @unique
+  password      String
+  isSuperadmin  Boolean @map("is_superadmin")
+  // Relation to Logs
+  logs          Log[]
+
+  @@map("admin")
+}
+
+model Carousel {
+  id   String @id @default(uuid())
+  file String
+
+  @@map("carousel")
+}
+
+model Log {
+  id         String     @id @default(uuid())
+  adminId    String     @map("admin_id")
+  admin      Admin      @relation(fields: [adminId], references: [id])
+  actionType ActionType @map("action_type")
+  entityType EntityType @map("entity_type")
+  oldData    String?    @map("old_data")
+  newData    String?    @map("new_data")
+  createdAt  DateTime   @default(now()) @map("created_at")
+
+  @@map("logs")
+}
+
+enum ActionType {
+  CREATE
+  UPDATE
+  DELETE
+}
+
+enum EntityType {
+  ADMIN
+  CAROUSEEL
+  CATEGORY
+  COUNTRY
+  PRODUCT
+  SUBCATEGORY
+  CAROUSEL
+}

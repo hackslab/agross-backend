@@ -1,0 +1,789 @@
+{
+  "info": {
+    "_postman_id": "a9a9f0b5-8e56-46f6-bb11-90ba69c25c43",
+    "name": "Agross",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "39646185"
+  },
+  "item": [
+    {
+      "name": "Admin",
+      "item": [
+        {
+          "name": "Create",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"name\": \"New Admin\",\n    \"username\": \"newadmin\",\n    \"password\": \"password123\",\n    \"isSuperadmin\": false\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "localhost:3000/admin",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["admin"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get All",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "localhost:3000/admin",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["admin"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get One",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "localhost:3000/admin/id",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["admin", "id"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"name\": \"Updated Admin Name\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "localhost:3000/admin/id",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["admin", "id"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Change Password",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"adminId\": \"<other_admin_id>\",\n    \"newPassword\": \"a-very-strong-password\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "localhost:3000/admin/change-password",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["admin", "change-password"]
+            },
+            "description": "Changes an admin's password. \n\n**SCENARIOS:**\n\n1.  **Superadmin changes another admin's password:**\n    ```json\n    {\n      \"adminId\": \"uuid-of-target-admin\",\n      \"newPassword\": \"new_password_for_user\"\n    }\n    ```\n\n2.  **Admin changes their own password:**\n    ```json\n    {\n      \"oldPassword\": \"my_current_password\",\n      \"newPassword\": \"my_new_strong_password\"\n    }\n    ```"
+          },
+          "response": []
+        },
+        {
+          "name": "Delete",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "localhost:3000/admin/id",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["admin", "id"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Login",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "var jsonData = JSON.parse(responseBody);",
+                  "pm.collectionVariables.set(\"accessToken\", jsonData.accessToken);"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"username\": \"superadmin\",\n    \"password\": \"admin123\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "localhost:3000/admin/login",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["admin", "login"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Carousel",
+      "item": [
+        {
+          "name": "Create",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "file",
+                  "type": "file",
+                  "src": "/C:/Users/Abdulaziz/Desktop/20250729_221123.png"
+                }
+              ]
+            },
+            "url": {
+              "raw": "localhost:3000/carousel",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["carousel"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get All",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "localhost:3000/carousel",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["carousel"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get One",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "localhost:3000/carousel/bf921784-c987-4d55-9631-e80cf5195811",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["carousel", "bf921784-c987-4d55-9631-e80cf5195811"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "localhost:3000/carousel/7d1a56ec-03b4-4857-9a64-b86322c19f88",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["carousel", "7d1a56ec-03b4-4857-9a64-b86322c19f88"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Category",
+      "item": [
+        {
+          "name": "Create",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "name_ru",
+                  "value": "Фрукты",
+                  "type": "text"
+                },
+                {
+                  "key": "name_en",
+                  "value": "Fruits",
+                  "type": "text"
+                },
+                {
+                  "key": "name_uz",
+                  "value": "Mevalar",
+                  "type": "text"
+                },
+                {
+                  "key": "name_kz",
+                  "value": "Жемістер",
+                  "type": "text"
+                },
+                {
+                  "key": "description_ru",
+                  "value": "Свежие и сочные фрукты.",
+                  "type": "text"
+                },
+                {
+                  "key": "description_en",
+                  "value": "Fresh and juicy fruits.",
+                  "type": "text"
+                },
+                {
+                  "key": "description_uz",
+                  "value": "Yangi va sersuv mevalar.",
+                  "type": "text"
+                },
+                {
+                  "key": "description_kz",
+                  "value": "Жаңа піскен және шырынды жемістер.",
+                  "type": "text"
+                },
+                {
+                  "key": "image",
+                  "type": "file",
+                  "src": "/C:/Users/Abdulaziz/Desktop/photo_2025-08-05_12-33-06.jpg"
+                }
+              ]
+            },
+            "url": {
+              "raw": "http://localhost:3000/categories",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["categories"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get All",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "localhost:3000/categories",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["categories"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get One",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "localhost:3000/categories/1eb78aa7-1ff3-4f96-ab9b-3d0b745497a2",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["categories", "1eb78aa7-1ff3-4f96-ab9b-3d0b745497a2"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "name_en",
+                  "value": "Organic Fruits",
+                  "type": "text"
+                },
+                {
+                  "key": "description_en",
+                  "value": "Fresh and juicy organic fruits.",
+                  "type": "text"
+                },
+                {
+                  "key": "image",
+                  "type": "file",
+                  "src": []
+                }
+              ]
+            },
+            "url": {
+              "raw": "localhost:3000/categories/id",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["categories", "id"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "localhost:3000/categories/id",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["categories", "id"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Subcategory",
+      "item": [
+        {
+          "name": "Create",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"name_ru\": \"Цитрусовые\",\n    \"name_en\": \"Citrus\",\n    \"name_uz\": \"Sitrus mevalar\",\n    \"name_kz\": \"Цитрусты жемістер\",\n    \"categoryId\": \"1eb78aa7-1ff3-4f96-ab9b-3d0b745497a2\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "localhost:3000/subcategories",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["subcategories"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get All",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "localhost:3000/subcategories",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["subcategories"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get One",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "localhost:3000/subcategories/id",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["subcategories", "id"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"name_en\": \"Tropical Fruits\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "localhost:3000/subcategories/id",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["subcategories", "id"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "localhost:3000/subcategories/id",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["subcategories", "id"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Country",
+      "item": [
+        {
+          "name": "Create",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"name\": \"Uzbekistan\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "localhost:3000/countries",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["countries"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get All",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "localhost:3000/countries",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["countries"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get One",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "localhost:3000/countries/0fcc0d2f-e72b-450b-a181-f2dfe1347205",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["countries", "0fcc0d2f-e72b-450b-a181-f2dfe1347205"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"name\": \"O'zbekiston\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "localhost:3000/countries/id",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["countries", "id"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "localhost:3000/countries/id",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["countries", "id"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Product",
+      "item": [
+        {
+          "name": "Create",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"name_ru\": \"Органические яблоки\",\n    \"name_en\": \"Organic Apples\",\n    \"name_uz\": \"Organik olmalar\",\n    \"name_kz\": \"Органикалық алмалар\",\n    \"description_ru\": \"Хрустящие и вкусные органические яблоки.\",\n    \"description_en\": \"Crisp and delicious organic apples.\",\n    \"description_uz\": \"Qarsildoq va mazali organik olmalar.\",\n    \"description_kz\": \"Қытырлақ және дәмді органикалық алмалар.\",\n    \"price\": 299.99,\n    \"structure_ru\": \"Белки, жиры, углеводы\",\n    \"structure_en\": \"Proteins, fats, carbohydrates\",\n    \"structure_uz\": \"Oqsillar, yog'lar, uglevodlar\",\n    \"structure_kz\": \"Ақуыздар, майлар, көмірсулар\",\n    \"quantity\": 100,\n    \"unitId\": \"enter-unit-id-here\",\n    \"categoryId\": \"1eb78aa7-1ff3-4f96-ab9b-3d0b745497a2\",\n    \"subcategoryId\": \"4e84cb84-8cb8-4ab1-9ab8-c1eb4e5ac502\",\n    \"countryId\": \"0fcc0d2f-e72b-450b-a181-f2dfe1347205\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "localhost:3000/products",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["products"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get All",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "localhost:3000/products",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["products"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get One",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "localhost:3000/products/id",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["products", "id"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"price\": 349.50,\n    \"quantity\": 150\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "localhost:3000/products/id",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["products", "id"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "localhost:3000/products",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["products"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Add File",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "file",
+                  "type": "file",
+                  "src": []
+                }
+              ]
+            },
+            "url": {
+              "raw": "localhost:3000/products/id/files?isVideo=false",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["products", "id", "files"],
+              "query": [
+                {
+                  "key": "isVideo",
+                  "value": "false"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Remove File",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "localhost:3000/products/productId/files/fileId",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["products", "productId", "files", "fileId"]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "accessToken",
+      "value": "",
+      "type": "string"
+    }
+  ]
+}
