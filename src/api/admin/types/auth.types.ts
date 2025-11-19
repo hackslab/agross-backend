@@ -5,4 +5,4 @@ export interface AdminJwtPayload {
   isSuperadmin: boolean;
 }
 
-export interface AuthenticatedAdmin extends AdminJwtPayload {}
+export type AuthenticatedAdmin = AdminJwtPayload;
