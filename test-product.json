@@ -1,0 +1,20 @@
+{
+  "name_uz": "Test Product",
+  "name_en": "Test Product",
+  "name_ru": "Test Product",
+  "name_kz": "Test Product",
+  "description_uz": "Test Description",
+  "description_en": "Test Description",
+  "description_ru": "Test Description",
+  "description_kz": "Test Description",
+  "price": 100.00,
+  "structure_uz": "",
+  "structure_en": "",
+  "structure_ru": "",
+  "structure_kz": "",
+  "quantity": 10,
+  "unitId": "PLACEHOLDER_UNIT_ID",
+  "categoryId": "PLACEHOLDER_CATEGORY_ID",
+  "subcategoryId": "PLACEHOLDER_SUBCATEGORY_ID",
+  "countryId": "PLACEHOLDER_COUNTRY_ID"
+}

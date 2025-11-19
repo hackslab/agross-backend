@@ -41,7 +41,7 @@ export class LogService {
     } catch (error) {
       // Fail-soft: do not block the main operation if logging fails (e.g., table missing)
       // Intentionally swallow after minimal visibility to avoid noisy logs in production
-      // eslint-disable-next-line no-console
+       
       console.warn(
         "LogService.createLog failed, continuing without logging:",
         error?.code || error?.message || error
@@ -79,7 +79,7 @@ export class LogService {
       }
     } catch (error) {
       // Fail-soft: cleanup xatosi asosiy operatsiyani to'xtatmasligi kerak
-      // eslint-disable-next-line no-console
+       
       console.warn(
         "LogService.cleanupOldLogs failed:",
         error?.code || error?.message || error

@@ -77,33 +77,33 @@ export class CreateProductDto {
   @ApiProperty({
     description: "Product structure/composition in Russian",
     example: "Белок 12%, клейковина 25%",
+    required: false,
   })
   @IsString()
-  @IsNotEmpty()
   structure_ru: string;
 
   @ApiProperty({
     description: "Product structure/composition in English",
     example: "Protein 12%, gluten 25%",
+    required: false,
   })
   @IsString()
-  @IsNotEmpty()
   structure_en: string;
 
   @ApiProperty({
     description: "Product structure/composition in Uzbek",
     example: "Oqsil 12%, gluten 25%",
+    required: false,
   })
   @IsString()
-  @IsNotEmpty()
   structure_uz: string;
 
   @ApiProperty({
     description: "product structure/composition in kazakh",
     example: "ақуыз 12%, глютен 25%",
+    required: false,
   })
   @IsString()
-  @IsNotEmpty()
   structure_kz: string;
 
   @ApiProperty({ description: "Available quantity", example: 1000 })

@@ -77,7 +77,7 @@ export class AdminService {
 
     if (isPasswordValid) {
       this.logger.debug(`Password valid for user: ${username}`);
-      const { password, ...result } = admin;
+      const { password: _password, ...result } = admin;
       return result;
     }
 
