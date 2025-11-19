@@ -15,9 +15,11 @@ export class ProductService {
   ) {}
 
   async create(createProductDto: CreateProductDto, admin: { id: string }) {
+    const { price, ...rest } = createProductDto;
     const createdProduct = await this.prisma.product.create({
       data: {
-        ...createProductDto,
+        ...rest,
+        price,
         viewCount: 0,
       },
       include: {
@@ -96,9 +98,13 @@ export class ProductService {
         files: true,
       },
     });
+    const { price, ...rest } = updateProductDto;
     const updatedProduct = await this.prisma.product.update({
       where: { id },
-      data: updateProductDto,
+      data: {
+        ...rest,
+        ...(price !== undefined ? { price } : {}),
+      },
       include: {
         category: true,
         subcategory: true,
