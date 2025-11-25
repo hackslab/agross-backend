@@ -23,5 +23,8 @@ jobs:
             git pull origin main --force
             npm i
             npm run build
+            sudo cp deployment/nginx/api.agross.uz /etc/nginx/sites-available/api.agross.uz
+            sudo nginx -t
+            sudo systemctl reload nginx
             pm2 restart agross-backend
 
