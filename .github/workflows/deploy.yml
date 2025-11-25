@@ -29,4 +29,3 @@ jobs:
             sudo nginx -t
             sudo systemctl reload nginx
             pm2 restart agross-backend
-
